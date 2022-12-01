@@ -1,0 +1,99 @@
+.agregarinfo{
+    margin-left: 70px;
+    margin-bottom: 1px;
+    margin-top: 15px;
+}
+.row{
+    width: 95%;
+
+}
+.tablainfo{
+   width: 90%;
+    margin-left: 60px;
+   
+}
+.form-control{
+    height: 30px;
+    
+}
+@media screen and (max-width:500px){
+    .tablainfo{
+        display:table-footer-group;
+        width: 90%;
+    }
+}
+.accionesinf{
+    text-align: center;
+}
+@media screen and (max-width:500px) {
+    .agregarinfo{
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+}
+.tituloinfo{
+    float: right;
+    margin-right: 84.5%;
+}
+@media screen and (max-width:500px) {
+    .tituloinfo
+    {
+        display: contents;
+        font-size: small;
+        float: right;
+        margin-left: 5px;
+    }
+}
+@media screen and (max-width:500px) {
+    .homeinfo
+    {
+        display: none;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .botonac
+    {
+        display: contents;
+        margin: 15px;
+    }
+}
+@media screen and (max-width:500px) {
+    .col
+    {
+        margin-left: 0%;
+    }
+}
+@media screen and (max-width:500px) {
+    .infodia
+    {
+        margin-top: 25px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .camposinf
+    {
+        display: none;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .modal-title
+    {
+        
+    }
+}
+.modalhederr
+{
+   height: 50px;
+}
+
+.fechainfo{
+    width: 400px;
+}
+
+.fechainfo:has(input.required) label:after{
+    content: '*';
+    color:red
+}

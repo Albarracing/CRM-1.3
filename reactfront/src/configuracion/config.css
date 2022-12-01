@@ -1,0 +1,122 @@
+.containercon{
+    height: 100%;
+}
+.form-control{
+    margin-bottom: 40px;
+    
+}
+.usuarios{
+    display:flex;
+    width: 400px;
+    
+}
+.pass{
+    
+}
+.usu{
+    height: 30px;
+}
+.usua{
+    display: flex;
+    width: 400px;
+    width: 500px;
+}
+.cabezeraconfig{
+    margin-left: 40px;
+   margin-bottom: 1px;
+   margin-top: 15px;
+}
+.titulocon{
+    float: right;
+    margin-right: 75%;
+    
+}
+.row{
+    width: 95%;
+
+}
+.tablacon{
+   width: 90%;
+    margin-left: 60px;
+   
+}
+.accionesconfig{
+    text-align: center;
+}
+.accionescon2{
+    text-align: center;
+}
+.nombreape{
+    display: flex;
+    width: 450px;
+    
+}
+.celemail{
+    display: flex;
+    width: 450px;
+}
+.col-md-2{
+    width: 100px;
+}
+
+.puesto{
+    display: -webkit-inline-box;
+    width: 210px;
+    margin-left: 8px;
+}
+.ubicacion{
+    display: -webkit-inline-box;
+    width: 250px;
+    
+}
+.tipubi{
+    margin-left: 10px;
+    
+}
+.tipusua{
+    margin-left: 5px;
+    display:flex;
+}
+.niveles{
+    margin-left: 5px;
+    
+}
+.anular{
+    margin-top: 10px;
+    margin-left: 5px;
+    
+}
+
+.anularusu{
+    display: flex;
+}
+.botonesconfig{
+    display: inherit;
+    margin-top: 50px;
+    margin-left: 280px;
+    
+}
+.btncon{
+    margin-left: 20px;
+}
+
+.titulocon{
+   margin-left: 58px;
+}
+
+@media screen and (max-width:500px){
+    .homeconf{
+        display: none;
+    }
+}
+
+@media screen and (max-width:500px){
+    .tablacon{
+        display:table-footer-group;
+    }
+}
+@media screen and (max-width:500px){
+    .titulocon{
+        display:contents;
+    }
+}
