@@ -5,11 +5,11 @@ const db = new Sequelize('dbCRM', 'admin', 'docat2307',{
     dialect: 'mysql',
     port: 3306
 })
-const getConnection = ()=> {
-    return db
-  }
-module.exports = {
-    getConnection
-}
+// const getConnection = ()=> {
+//     return db
+//   }
+// module.exports = {
+//     getConnection
+// }
 
 export default db
