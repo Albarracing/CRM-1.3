@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
-const db = new Sequelize('dbCRM', 'admin', 'docat2307',{
-    host: 'dbcrm.cezkuslxqtkp.us-east-1.rds.amazonaws.com',
+const db = new Sequelize('crm_prueba', 'root', 'Cortina.11.Planta',{
+    host: 'localhost',
     dialect: 'mysql',
     port: 3306
 })

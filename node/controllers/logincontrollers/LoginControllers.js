@@ -1,7 +1,125 @@
 import UsuariosModel from "../../models/modelslogin/LoginModels.js"
 import generarJWT from "../../helpers/generarJWT.js"
-import bcrypt, { hash } from 'bcrypt'
+import argon2 from 'argon2'
 import db from "../../database/db.js"
+import e from "express"
+
+
+
+export const getUser = async(req, res) =>{
+    try {
+        const response = await UsuariosModel.findAll({
+            attributes:['uuid', 'nombre', 'email', 'role'],
+        })
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({msg: error.message})
+    }
+}
+
+export const getUserById = async(req, res) =>{
+    try {
+        const response = await UsuariosModel.findOne({
+            attributes:['uuid', 'nombre', 'email', 'role'],
+            where:{
+                uuid: req.params.id
+            }
+        })
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({msg: error.message})
+    }
+}
+
+export const createUser = async(req, res) =>{
+    const {nombre, email, contraseña, confContraseña, role} = req.body
+    if(contraseña !== confContraseña) return res.status(400).json({msg: "La contraseña ingresada es incorrecta"})
+    const hashcontraseña = await argon2.hash(contraseña)
+    try {
+        await UsuariosModel.create({
+            nombre: nombre,
+            email: email,
+            contraseña: hashcontraseña,
+            role: role
+        })
+        res.status(201).json({msg: "Creado correctamente"})
+    } catch (error) {
+        res.status(400).json({msg: error.message})
+    }
+}
+
+export const updateUser = async(req, res) =>{
+    const user = await UsuariosModel.findOne({
+        where:{
+            uuid: req.params.id
+        }
+    })
+    if(!user) return res.status(404).json({msg: 'usuario no encontrado'})
+    const {nombre, email, contraseña, confContraseña, role} = req.body
+    let hashcontraseña
+    if(contraseña === "" || contraseña === null){
+        hashcontraseña = user.contraseña
+    }else{
+        hashcontraseña = await argon2.hash(contraseña)
+    }
+    if(contraseña !== confContraseña) return res.status(400).json({msg:"contraseña confirmada"})
+    try {
+        await UsuariosModel.update({
+            nombre: nombre,
+            email: email,
+            contraseña: hashcontraseña,
+            role: role
+        },{
+            where:{
+                id:user.id
+            } 
+        })
+        res.status(200).json({msg: "Actualizado correctamente"})
+    } catch (error) {
+        res.status(400).json({msg: error.message})
+    }
+}
+export const deleteUser = async(req, res) =>{
+    const user = await UsuariosModel.findOne({
+        where:{
+            uuid: req.params.id
+        }
+    })
+    if(!user) return res.status(404).json({msg: 'usuario no encontrado'})
+    try {
+        await UsuariosModel.destroy({
+            where:{
+                id:user.id
+            } 
+        })
+        res.status(200).json({msg: "Usuario eliminado correctamente"})
+    } catch (error) {
+        res.status(400).json({msg: error.message})
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const registrar = async (req, res) =>{
 // const email = req.body.email;
@@ -42,9 +160,9 @@ import db from "../../database/db.js"
 
 
 //--------------REGISTRAR---------------
-const registrar = async (req, res) =>{
-    const email  = req.body.email
-    const contraseña = req.body.contraseña
+// const registrar = async (req, res) =>{
+//     const email  = req.body.email
+//     const contraseña = req.body.contraseña
     // const contraseñahas = await bcrypt.hash(contraseña, 10);
     // db.query('INSERT INTO usuarios SET ?', {email:email, contraseña:contraseñahas}, async(error, result)=>{
     //     if(error){
@@ -55,22 +173,22 @@ const registrar = async (req, res) =>{
     // })
 
 
-    const existeUsuario = await UsuariosModel.findOne({ 
-        where: { email:email}})
+//     const existeUsuario = await UsuariosModel.findOne({ 
+//         where: { email:email}})
  
-    if(existeUsuario){
-        const error = new Error('Usuario ya registrado')
-        return res.status(400).json({msg: error.message})
-    }
-    try{
-        const usuario = new UsuariosModel(req.body)
-        const usuarioGuardado = await usuario.save()
-        res.json({usuarioGuardado})
-    }catch (error){
-        console.log(error)
-    }
+//     if(existeUsuario){
+//         const error = new Error('Usuario ya registrado')
+//         return res.status(400).json({msg: error.message})
+//     }
+//     try{
+//         const usuario = new UsuariosModel(req.body)
+//         const usuarioGuardado = await usuario.save()
+//         res.json({usuarioGuardado})
+//     }catch (error){
+//         console.log(error)
+//     }
 
-}
+// }
 // const perfil = (req, res) =>{
 //     res.json({msg:'mostrando perfil'})
 // }
@@ -106,15 +224,15 @@ const registrar = async (req, res) =>{
     
 
 //-----aca empieza-----
-const autenticar = async (req, res) => {
-   const { email } = req.body
-   const {contraseña} = req.body
-    const usuarioAuntenticar = await UsuariosModel.findAll({ 
-        where: { email:email, contraseña:contraseña}})
-    if(!usuarioAuntenticar) {
-     const error = new Error('el usuario no existe')
-     return res.status(404).json({msg: error.message})
-    }
+// const autenticar = async (req, res) => {
+//    const { email } = req.body
+//    const {contraseña} = req.body
+//     const usuarioAuntenticar = await UsuariosModel.findAll({ 
+//         where: { email:email, contraseña:contraseña}})
+//     if(!usuarioAuntenticar) {
+//      const error = new Error('el usuario no existe')
+//      return res.status(404).json({msg: error.message})
+//     }
 
     
     
@@ -129,12 +247,12 @@ const autenticar = async (req, res) => {
     //     const error = new Error('la contraseña es incorrecta')
     //     return res.status(403).json({msg:error.message})
     // }
-}
+//}
 
 
-export{
-    registrar,
+//export{
+    //registrar,
     //perfil,
    // confirmar,
-    autenticar
-}
+    //autenticar
+//}
