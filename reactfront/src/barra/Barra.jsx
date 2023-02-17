@@ -1,30 +1,38 @@
 import './home.css'
 import 'primeicons/primeicons.css';
 import React, { useState } from 'react';
-import {
-    
-    FaBars,
-    FaThList
-}from "react-icons/fa";
+import {FaBars}from "react-icons/fa";
 import {FiSettings} from 'react-icons/fi'
-import {TbMeat, TbGasStation, } from 'react-icons/tb'
-import {MdOutlineEmojiFoodBeverage} from 'react-icons/md'
+//import {TbMeat, TbGasStation, } from 'react-icons/tb'
+//import {MdOutlineEmojiFoodBeverage} from 'react-icons/md'
 import {BsTelephone, BsTruck} from 'react-icons/bs'
 import {AiOutlineUser, AiOutlineFileDone} from 'react-icons/ai'
-import { NavLink, Link } from 'react-router-dom';
+import {IoLogOutOutline} from 'react-icons/io5'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { LogOut, reset  } from '../features/authSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Barra = () =>{
-    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { user } = useSelector((state) => state.auth);
+
+  const logout = () => {
+    dispatch(LogOut());
+    dispatch(reset());
+    navigate("/");
+  };
   
   const[isOpen ,setIsOpen] = useState(false);
   const toggle = () => setIsOpen (!isOpen);
   const menuItem=[
 
-      {
-          path:"/",
-          name:"Usuarios",
-          icon:<AiOutlineUser/>,
+     
+        {
+          path:"/usuarios",
+          name:"Cerrar secion",
+          icon:<AiOutlineUser/>
       },
       {
           path:"/configuracion",
@@ -36,14 +44,16 @@ const Barra = () =>{
         name:"Informes",
         icon:<AiOutlineFileDone/>
       },
-     
-         
-     
-     
       {
         path:"/telefono",
         name:"Teléfono",
         icon:<BsTelephone/>
+    },
+    {
+        path:"/",
+        name:"Cerrar secion",
+        icon:<IoLogOutOutline/>,
+        onClick:{logout}
     },
     
   ]
