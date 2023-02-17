@@ -2,9 +2,11 @@
 import db from '../../database/db.js'
 //importo sequelize
 import {Sequelize} from 'sequelize'
-import { DataTypes } from 'sequelize'
+//import {  } from 'sequelize'
 import bcrypt, { hash } from 'bcrypt'
 import generartoken from '../../helpers/generartoken.js'
+
+const {DataTypes} = Sequelize
 
 const UsuariosModel = db.define('usuarios',{
     uuid:{
@@ -49,11 +51,11 @@ const UsuariosModel = db.define('usuarios',{
         }
     },
 
-    telefono:{
-        type:DataTypes.NUMBER,
-        default:null,
-        trim:true
-    },
+    // telefono:{
+    //     type:DataTypes.NUMBER, 
+    //     default:null,
+    //     trim:true
+    // },
     // token:{
     //     type:DataTypes.STRING,
     //     default: generartoken()
