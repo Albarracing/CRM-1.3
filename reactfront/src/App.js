@@ -7,7 +7,7 @@ import Login from './login/Login';
 import Home from './home/home';
 import Configuracion from './configuracion/config'
 import Telefono from './pedidos/Telefono/Telefono'
-import Register from './configuracion/registrar';
+import Editusers from './configuracion/editusers';
 import Userlist from './configuracion/usuarios';
 import {AuthProvider} from './contex/AuthProvider';
 
@@ -18,6 +18,7 @@ function App() {
           <AuthProvider>
               <Routes>
               <Route path="/users" element={<Userlist />} />
+              <Route path="/users/edit/:id" element={<Editusers />} />
                   <Route path='/Informes' element={ <Informes/>} />
                   <Route path='/telefono' element={ <Telefono/>} />
                   <Route path='/configuracion' element={ <Configuracion/>} />

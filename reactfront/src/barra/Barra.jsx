@@ -31,7 +31,7 @@ const Barra = () =>{
      
         {
           path:"/usuarios",
-          name:"Cerrar secion",
+          name:"Usuarios",
           icon:<AiOutlineUser/>
       },
       {
@@ -50,10 +50,10 @@ const Barra = () =>{
         icon:<BsTelephone/>
     },
     {
-        path:"/",
+       
         name:"Cerrar secion",
         icon:<IoLogOutOutline/>,
-        onClick:{logout}
+        button:{logout}
     },
     
   ]
@@ -79,7 +79,11 @@ const Barra = () =>{
            
         }
     </div>
-   
+   <div>
+   <button onClick={logout} className="button is-light">
+                  Log out 
+                </button>
+   </div>
 </div>
 </div>
 
