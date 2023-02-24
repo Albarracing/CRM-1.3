@@ -6,8 +6,8 @@ import db from './database/db.js'
 import auth from './routes/routeslogin/authRoutes.js'
 import usersroutes from './routes/routeslogin/LoginRoutes.js'
 import telefonoRoute from './routes/reportes/telefonoRoute.js'
-//import telefonorouter from './routes/TelefonoRoutes.js'
-import combustiblerouter from './routes/CombustibleRoute.js'
+import telefonorouter from './routes/TelefonoRoutes.js'
+// import combustiblerouter from './routes/CombustibleRoute.js'
 import informerouter from './routes/InformesRoutes.js'
 import configuracionrouter from './routes/ConfiguracionRoutes.js'
 // import transporteRoutes from './routes/routes.js'
@@ -53,8 +53,8 @@ app.use(express.json());
 //app.use('/frescos',  frescosrouter )
 //app.use('/secos', secosrouter )
 //app.use('/logistica', logisticarouter)
-//app.use('/telefono', telefonorouter)
-app.use('/combustible', combustiblerouter)
+app.use('/telefono', telefonorouter)
+// app.use('/combustible', combustiblerouter)
 app.use('/informes', informerouter)
 app.use('/configuracion', configuracionrouter)
 app.use(usersroutes)
